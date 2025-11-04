@@ -93,7 +93,6 @@ def generate_reset_logs(devices, result_filename: str = None):
     Generate a reset log with a sample mobo reset config
     """
 
-    time_now = datetime.datetime.now()
     gs_pci_idx = []
     wh_pci_idx = []
     for i, dev in enumerate(devices):
@@ -101,6 +100,18 @@ def generate_reset_logs(devices, result_filename: str = None):
             wh_pci_idx.append(dev.get_pci_interface_id())
         elif dev.as_gs():
             gs_pci_idx.append(dev.get_pci_interface_id())
+    
+    return generate_reset_logs(wh_pci_idx, gs_pci_idx, result_filename)
+
+
+def generate_reset_logs(wh_pci_idx: List[int], gs_pci_idx: List[int], result_filename: str = None):
+    """
+    Generate and save reset logs
+    Separate PCI indexes for gs and wh devices
+    Generate a reset log with a sample mobo reset config
+    """
+
+    time_now = datetime.datetime.now()
     reset_log = log.HostResetLog(
         time=time_now,
         host_name=get_host_info()["Hostname"],
