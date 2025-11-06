@@ -10,7 +10,7 @@ import sys
 import json
 import datetime
 from pathlib import Path
-from typing import Dict, Union
+from typing import Dict, List, Union
 from enum import Enum
 from dataclasses import dataclass
 import tt_tools_common.reset_common.host_reset_log as log
